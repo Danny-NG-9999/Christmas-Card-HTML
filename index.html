@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #1a365d, #0f172a);
+      font-family: Arial, sans-serif;
+    }
+
+    .card-container {
+      perspective: 2000px;
+      width: 300px;
+      height: 400px;
+      cursor: pointer;
+      margin: 50px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1.5s ease-in-out;
+    }
+
+    .card.open {
+      transform: rotateY(-180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .card-front {
+      background: #c9184a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .card-back {
+      background: white;
+      transform: rotateY(180deg);
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .front-text {
+      text-align: center;
+      font-size: 1.5em;
+      padding: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Snowman Styles */
+    .snowman {
+      position: relative;
+      height: 200px;
+      margin: 20px 0;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .snowman-head {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+    }
+
+    .snowman-body {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border-radius: 50%;
+      position: relative;
+      top: -20px;
+      left: -10px;
+      box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+    }
+
+    .snowman-bottom {
+      width: 90px;
+      height: 90px;
+      background: white;
+      border-radius: 50%;
+      position: relative;
+      top: -40px;
+      left: -20px;
+      box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+    }
+
+    .carrot {
+      position: absolute;
+      left: 40px;
+      top: 25px;
+      width: 0;
+      height: 0;
+      border-left: 20px solid #ff6b00;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    .eye {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    .eye.left { left: 15px; top: 20px; }
+    .eye.right { left: 30px; top: 20px; }
+
+    .scarf {
+      position: absolute;
+      width: 60px;
+      height: 10px;
+      background: #c9184a;
+      top: 45px;
+      left: -5px;
+      border-radius: 5px;
+      transform: rotate(-10deg);
+      z-index: 2;
+    }
+
+    .scarf:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #c9184a;
+      bottom: -15px;
+      right: 0;
+      border-radius: 5px;
+    }
+
+    .message {
+      text-align: center;
+      color: #1a365d;
+    }
+
+    .message h2 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #c9184a;
+    }
+
+    .message p {
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    /* Snow Animation */
+    .snow {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: snowfall linear infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(-100%) translateX(-20px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(1000%) translateX(20px);
+        opacity: 0;
+      }
+    }
+
+    .click-instruction {
+      position: absolute;
+      bottom: 10px;
+      color: #666;
+      font-size: 0.8em;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-front">
+        <div class="front-text">
+          <h2>Click to Open</h2>
+          <p>🎄Greetings🎄</p>
+        </div>
+      </div>
+      <div class="card-back">
+        <div class="snowman">
+          <div class="snowman-head">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="carrot"></div>
+            <div class="scarf"></div>
+          </div>
+          <div class="snowman-body"></div>
+          <div class="snowman-bottom"></div>
+        </div>
+        <div class="message">
+          <h2>Merry Christmas!</h2>
+          <p>Wishing you a holiday season brimming with joy, prosperity, and warmth.
+          </p>
+        </div>
+        <div class="click-instruction">Click to close</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Card flip animation
+    const card = document.querySelector('.card');
+    card.addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+
+    // Create snowflakes
+    function createSnow() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snow');
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+      snowflake.style.opacity = Math.random();
+      snowflake.style.width = snowflake.style.height = Math.random() * 5 + 5 + 'px';
+      
+      document.body.appendChild(snowflake);
+      
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    // Generate snowflakes periodically
+    setInterval(createSnow, 100);
+  </script>
+</body>
+</html>
